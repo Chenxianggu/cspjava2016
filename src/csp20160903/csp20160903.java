@@ -1,12 +1,15 @@
 package csp20160903;
 
-
+/**
+ * @Auther cxg
+ * @DAte 2023/10/22
+ */
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 //题目炉石传说
-public class Main{
+public class csp20160903{
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();//操作数量
@@ -33,12 +36,12 @@ public class Main{
         game.outputResult();
     }
     //玩家类
-    public static class Hero{
+    public static class Player{
         public int heroBlood = 30;
         public int code ;
         public Game game;
         public Map<Integer,Follower> followers = new HashMap<>();
-        public Hero(int code,Game game){
+        public Player(int code,Game game){
             this.code = code;
             this.game = game;
         }
@@ -58,7 +61,7 @@ public class Main{
             followers.put(place, follower);
         }
         //攻击
-        public void attack(int myFollower,int enemyFoller,Hero enemy) {
+        public void attack(int myFollower,int enemyFoller,Player enemy) {
             Follower my = followers.get(myFollower);
             if(enemyFoller == 0) {//如果攻击的是英雄
                 enemy.heroBlood -= my.attack;
@@ -117,11 +120,11 @@ public class Main{
     }
     //游戏类
     public static class Game{
-        public Hero[] players = new Hero[2];
+        public Player[] players = new Player[2];
         public int endCode = 0;//1表示先手玩家赢了 -1表示后手 0表示还没游戏结束
         public Game() {
-            players[0] = new Hero(1,this);
-            players[1] = new Hero(-1,this);
+            players[0] = new Player(1,this);
+            players[1] = new Player(-1,this);
         }
         public void outputResult() {
             System.out.println(endCode);
